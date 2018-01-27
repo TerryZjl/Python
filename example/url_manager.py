@@ -21,7 +21,7 @@ class UrlManager(object):
 	def has_new_url(self):#判断管理器中是否有这个url
 		return len(self.new_urls) != 0
 
-	def get_new_url(self):
+	def get_new_url(self):#获取一个新的url
 		new_url = self.new_urls.pop()
 		self.old_urls.add(new_url)
 		return new_url
