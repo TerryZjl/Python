@@ -19,21 +19,20 @@ class SpiderMain(object):
 		while  self.urls.has_new_url():
 			try:
 				new_url = self.urls.get_new_url()#从url管理起中获取一个待爬取url
-				print 'craw %d  url %s' % (count, new_url)
+				print u'爬取第[%d]个url: %s' % (count, new_url)
 				html_cont = self.downloader.download(new_url) 
 				new_urls, new_data = self.parser.parse(new_url, html_cont)
 				self.urls.add_new_urls(new_urls) #将新的url添加到url管理器
 				self.output.collect_data(new_data) #输出器收集数据
-				if count == 10:
+				if count == 100:
 					break
 				count = count + 1 
-				print 'count:',count
 			except:
 				print 'craw error'
 		self.output.output_html() #将结果输出
 
 if __name__=='__main__':
-	root_url = 'https://baike.baidu.com/view/21087.htm'
+	#root_url = 'https://baike.baidu.com/view/21087.htm'
 	root_url = 'https://baike.baidu.com/item/%E6%8C%87%E9%92%88'
 	obj_spider = SpiderMain()
 	obj_spider.craw(root_url)

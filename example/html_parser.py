@@ -9,15 +9,16 @@ class HtmlParser(object):
 	
 	def _get_new_urls(self, page_url, soup): #获取当前页面里有用的链接
 		new_urls = set()
-		links = soup.find('div',class_='para').find_all('a', href=re.compile(r"item"))
-		#links = soup.find_all('a', href=re.compile(r"/item.\.htm"))#r使得\失效
-		print 'get new url'
-		for link in links:
-			new_url = link['href'] #匹配出href后面对应的字符串
-			new_full_url = urlparse.urljoin(page_url, new_url)#urlparse的urljoin放法是把new_url按照page_url的格式链接在page_url上
-			new_urls.add(new_full_url)
-			print new_full_url
-		print 'get end'
+		divlinks = soup.find_all('div',class_='para')
+		print 'craw new url'
+		for divlink in divlinks:
+			links = divlink.find_all('a', href=re.compile(r"item"))
+			for link in links:
+				new_url = link['href'] #匹配出href后面对应的字符串
+				new_full_url = urlparse.urljoin(page_url, new_url)#urlparse的urljoin放法是把new_url按照page_url的格式链接在page_url上
+				new_urls.add(new_full_url)
+				print new_full_url
+		print 'craw end'
 		return new_urls
 
 
