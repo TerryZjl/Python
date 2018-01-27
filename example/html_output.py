@@ -14,6 +14,7 @@ class HtmlOutput(object):
 		fout = open('output.html','w')
 
 		fout.write("<html>")
+		fout.write('<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />')
 		fout.write("<body>")
 		fout.write("<table>")
 		for data in self.datas:
